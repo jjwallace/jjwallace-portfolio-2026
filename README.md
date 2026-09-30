@@ -7,6 +7,23 @@ Interactive web work: games, canvas rendering, physics, and AI-native tools.
 
 ---
 
+## T.I.N.K. (Thought Interactive Neural Kernel)
+**Live:** [jjwallace.github.io/tink-site](https://jjwallace.github.io/tink-site/) · Source: [github.com/jjwallace/tink-site](https://github.com/jjwallace/tink-site)
+
+<img src="screenshots/tink.webp" alt="T.I.N.K." width="500">
+
+A voice-and-overlay desktop companion for AI coding tools like Claude Code and Cursor. It listens to your editor and coding agents and turns their output into one calm spoken voice. "A more capable, less smug descendant of Clippy."
+
+The landing site is a scroll-driven story in a PixiJS canvas:
+- **Choreography:** three animated characters (a sphere, a glowing orb, and a tentacled creature) move in sync with scroll progress.
+- **Physics:** Verlet-chain tentacle simulation for the creature.
+- **Audio:** a Web Audio chirp synthesizer creates the creature's "voice" with no audio files, and Howler handles the sound effects.
+- **Stack:** React, TypeScript, Vite, and Lenis smooth scrolling.
+
+**Why it matters:** it shows an opinion on AI-assisted engineering (one calm voice instead of a noisy stream of agent output), presented through custom canvas animation and audio.
+
+---
+
 ## Exploding Bookmarks
 **Live:** [explodingbookmarks.com](https://explodingbookmarks.com) · Browser extension (Chrome, Brave, Firefox) + standalone web demo
 
@@ -38,38 +55,46 @@ A real-time multiplayer trivia game. Players scan a QR code, join from their pho
 
 ---
 
-## T.I.N.K. (Thought Interactive Neural Kernel)
-**Live:** [jjwallace.github.io/tink-site](https://jjwallace.github.io/tink-site/) · Source: [github.com/jjwallace/tink-site](https://github.com/jjwallace/tink-site)
+## Older Projects
 
-<img src="screenshots/tink.webp" alt="T.I.N.K." width="500">
+Commercial web games from 2008 to 2016, published by Nickelodeon, MTV, ArmorGames, MaxGames and others. Originally shown on [my earlier portfolio site](https://jjwallace.github.io/jjwallace-website/).
 
-A voice-and-overlay desktop companion for AI coding tools like Claude Code and Cursor. It listens to your editor and coding agents and turns their output into one calm spoken voice. "A more capable, less smug descendant of Clippy."
-
-The landing site is a scroll-driven story in a PixiJS canvas:
-- **Choreography:** three animated characters (a sphere, a glowing orb, and a tentacled creature) move in sync with scroll progress.
-- **Physics:** Verlet-chain tentacle simulation for the creature.
-- **Audio:** a Web Audio chirp synthesizer creates the creature's "voice" with no audio files, and Howler handles the sound effects.
-- **Stack:** React, TypeScript, Vite, and Lenis smooth scrolling.
-
-**Why it matters:** it shows an opinion on AI-assisted engineering (one calm voice instead of a noisy stream of agent output), presented through custom canvas animation and audio.
+<table>
+<tr>
+<td width="50%" valign="top"><a href="https://www.kongregate.com/en/games/jjwallace/gum-drop-hop"><img src="screenshots/older/gumdrophop.webp" alt="Gum Drop Hop" width="100%"></a><br><a href="https://www.kongregate.com/en/games/jjwallace/gum-drop-hop"><b>Gum Drop Hop</b></a><br><sub>MaxGames · Designer, Animator, Programmer · 21 days</sub><br>Non-violent platformer. 360 million plays in 3 years; 2B+ plays across the franchise.<br><a href="https://www.kongregate.com/en/games/jjwallace/gum-drop-hop">Play</a></td>
+<td width="50%" valign="top"><a href="https://www.kongregate.com/en/games/jjwallace/wonder-rocket"><img src="screenshots/older/wonderrocket.webp" alt="Wonder Rocket" width="100%"></a><br><a href="https://www.kongregate.com/en/games/jjwallace/wonder-rocket"><b>Wonder Rocket</b></a><br><sub>Nickelodeon · Designer, Animator, Programmer · 28 days</sub><br>Upgrade-and-launch game.<br><a href="https://www.kongregate.com/en/games/jjwallace/wonder-rocket">Play</a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="https://armorgames.com/play/4568/iron-turtle"><img src="screenshots/older/ironturtle.webp" alt="Iron Turtle" width="100%"></a><br><a href="https://armorgames.com/play/4568/iron-turtle"><b>Iron Turtle</b></a><br><sub>ArmorGames · Designer, Animator, Programmer · 21 days</sub><br>Puzzle platformer featuring a robot turtle, with springs, coins and puzzles.<br><a href="https://armorgames.com/play/4568/iron-turtle">Play</a></td>
+<td width="50%" valign="top"><a href="https://www.addictinggames.com/funny/balls-of-life"><img src="screenshots/older/ballsoflife.webp" alt="The Balls of Life" width="100%"></a><br><a href="https://www.addictinggames.com/funny/balls-of-life"><b>The Balls of Life</b></a><br><sub>MTV / Nickelodeon · Designer, Animator, Programmer · 21 days</sub><br>Platformer comedy game.<br><a href="https://www.addictinggames.com/funny/balls-of-life">Play</a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="https://www.kongregate.com/en/games/jjwallace/lost-fluid"><img src="screenshots/older/lostfluid.webp" alt="Lost Fluid" width="100%"></a><br><a href="https://www.kongregate.com/en/games/jjwallace/lost-fluid"><b>Lost Fluid</b></a><br><sub>Nickelodeon · Designer, Animator, Programmer · 21 days</sub><br>Experimental discovery platformer: land on a distant planet and start life on it.<br><a href="https://www.kongregate.com/en/games/jjwallace/lost-fluid">Play</a></td>
+<td width="50%" valign="top"><a href="https://www.kongregate.com/en/games/jjwallace/solar-ball"><img src="screenshots/older/solarball.webp" alt="Solar Ball" width="100%"></a><br><a href="https://www.kongregate.com/en/games/jjwallace/solar-ball"><b>Solar Ball</b></a><br><sub>CoolBuddy · Designer, Animator, Programmer · 8 days</sub><br>Physics puzzle game mixing pinball and pool.<br><a href="https://www.kongregate.com/en/games/jjwallace/solar-ball">Play</a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="https://www.kongregate.com/en/games/jjwallace/bean-fiend"><img src="screenshots/older/beanfiend.webp" alt="Bean Fiend" width="100%"></a><br><a href="https://www.kongregate.com/en/games/jjwallace/bean-fiend"><b>Bean Fiend</b></a><br><sub>NextPlay · Designer, Animator, Programmer · 16 days</sub><br>Platformer adventure game.<br><a href="https://www.kongregate.com/en/games/jjwallace/bean-fiend">Play</a></td>
+<td width="50%" valign="top"><img src="screenshots/older/nog.webp" alt="Nog" width="100%"><br><b>Nog</b><br><sub>CoolBuddy · Designer, Animator, Programmer · 14 days</sub><br>Platformer with psychedelic themes.</td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screenshots/older/theslob.webp" alt="The Slob" width="100%"><br><b>The Slob</b><br><sub>PlayHub · Designer, Animator, Programmer · 21 days</sub><br>Platformer adventure game.</td>
+<td width="50%" valign="top"><img src="screenshots/older/redlander.webp" alt="Red Lander" width="100%"><br><b>Red Lander</b><br><sub>Mathfort · Designer, Animator, Programmer · 3 days</sub><br>Experimental education game.</td>
+</tr>
+</table>
 
 ---
 
-## Older Projects
+## Corporate
 
-Commercial web games from 2008 to 2017, published by Nickelodeon, MTV, ArmorGames, MaxGames and others, plus games for the US Army with FOX at MRM//McCann. Originally shown on [my earlier portfolio site](https://jjwallace.github.io/jjwallace-website/).
+Games built for brands and partners.
 
-| | Project |
-|---|---|
-| <img src="screenshots/older/bioextract.webp" alt="Bio Extract" width="250"> | **Bio Extract**<br>US Army / FOX @ MRM//McCann · Programmer · 21 days<br>Tap/click strategy game (Angular, PhaserJS): isolate mind-controlling alien microbes. Used for microbiologist recruiting. |
-| <img src="screenshots/older/uav.webp" alt="UAV" width="250"> | **UAV**<br>US Army / FOX @ MRM//McCann · Programmer · 28 days<br>Flight simulator (Angular, PhaserJS) with pseudo-3D mechanics built for canvas rendering. Sprites come from a recycled pool, then pan, rotate and scale for effects. |
-| <img src="screenshots/older/wonderrocket.webp" alt="Wonder Rocket" width="250"> | **Wonder Rocket**<br>Nickelodeon · Designer, Animator, Programmer · 28 days<br>Upgrade-and-launch game. |
-| <img src="screenshots/older/nog.webp" alt="Nog" width="250"> | **Nog**<br>CoolBuddy · Designer, Animator, Programmer · 14 days<br>Platformer with psychedelic themes. |
-| <img src="screenshots/older/gumdrophop.webp" alt="Gum Drop Hop" width="250"> | **Gum Drop Hop**<br>MaxGames · Designer, Animator, Programmer · 21 days<br>Non-violent platformer. 360 million plays in 3 years; 2B+ plays across the franchise. |
-| <img src="screenshots/older/theslob.webp" alt="The Slob" width="250"> | **The Slob**<br>PlayHub · Designer, Animator, Programmer · 21 days<br>Platformer adventure game. |
-| <img src="screenshots/older/ballsoflife.webp" alt="The Balls of Life" width="250"> | **The Balls of Life**<br>MTV / Nickelodeon · Designer, Animator, Programmer · 21 days<br>Platformer comedy game. |
-| <img src="screenshots/older/lostfluid.webp" alt="Lost Fluid" width="250"> | **Lost Fluid**<br>Nickelodeon · Designer, Animator, Programmer · 21 days<br>Experimental discovery platformer: land on a distant planet and start life on it. |
-| <img src="screenshots/older/ironturtle.webp" alt="Iron Turtle" width="250"> | **Iron Turtle**<br>ArmorGames · Designer, Animator, Programmer · 21 days<br>Puzzle game featuring a robot, with springs, coins and puzzles. |
-| <img src="screenshots/older/solarball.webp" alt="Solar Ball" width="250"> | **Solar Ball**<br>CoolBuddy · Designer, Animator, Programmer · 8 days<br>Physics puzzle game mixing pinball and pool. |
-| <img src="screenshots/older/beanfiend.webp" alt="Bean Fiend" width="250"> | **Bean Fiend**<br>NextPlay · Designer, Animator, Programmer · 16 days<br>Platformer adventure game. |
-| <img src="screenshots/older/redlander.webp" alt="Red Lander" width="250"> | **Red Lander**<br>Mathfort · Designer, Animator, Programmer · 3 days<br>Experimental education game. |
+<table>
+<tr>
+<td width="50%" valign="top"><a href="https://wolfgames.net"><img src="screenshots/corporate/clue-hunter.webp" alt="Law &amp; Order: Clue Hunter" width="100%"></a><br><a href="https://wolfgames.net"><b>Law &amp; Order: Clue Hunter</b></a><br><sub>Wolf Games · on Peacock</sub><br>Puts Peacock viewers in the detective's seat: inspect crime scenes, identify suspects and close cases without leaving the app.<br><a href="https://wolfgames.net">Wolf Games</a></td>
+<td width="50%" valign="top"><img src="screenshots/corporate/bioextract.webp" alt="Bio Extract" width="100%"><br><b>Bio Extract</b><br><sub>US Army / FOX @ MRM//McCann · Programmer · 21 days</sub><br>Tap/click strategy game (Angular, PhaserJS): isolate mind-controlling alien microbes. Used for microbiologist recruiting.</td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screenshots/corporate/uav.webp" alt="UAV" width="100%"><br><b>UAV</b><br><sub>US Army / FOX @ MRM//McCann · Programmer · 28 days</sub><br>Flight simulator (Angular, PhaserJS) with pseudo-3D mechanics built for canvas rendering. Sprites come from a recycled pool, then pan, rotate and scale for effects.</td>
+<td width="50%"></td>
+</tr>
+</table>
