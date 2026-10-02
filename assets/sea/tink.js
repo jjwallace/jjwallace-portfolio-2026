@@ -4,14 +4,14 @@
 // distance and circles it, and a soft push away from the screen edges. Without a mouse (or when it's
 // idle) it just roams. Tentacle and particle state live in typed arrays sized once.
 
-const SCALE = 1.2;
+const SCALE = 1.6;
 const HEAD_RADIUS = 3.635;
 const THICKNESS = 2.369;
 const LENGTH = 12.286;
-const FRICTION = 0.08; // lower than the original 0.181 so tentacles keep momentum and flow loosely
-const TENTACLES = 12;
+const FRICTION = 0.04; // much lower than the original 0.181 so tentacles keep momentum and keep moving
+const SWAY = 0.12; // a slow sideways push on each tentacle node so the legs drift even when T.I.N.K. is still
+const TENTACLES = 8;
 const MAX_NODES = 16;
-const EYE_COLOR = 0xff9db0;
 
 const PARTICLES = 300; // ring buffer
 const EMIT_PER_FRAME = 2;
@@ -58,11 +58,12 @@ export function createTink(PIXI) {
   let vy = rand(-1, 1);
   let heading = rand(0, Math.PI * 2);
   let orbitDir = Math.random() < 0.5 ? 1 : -1;
+  let swayTime = 0;
   for (let t = 0; t < TENTACLES; t++) {
     len[t] = Math.floor(rand(10, 16));
-    radius[t] = rand(0.05, 1);
+    radius[t] = rand(0.8, 0.9); // nearly uniform thickness
     spacing[t] = rand(0.2, 1);
-    fric[t] = rand(0.82, 0.94);
+    fric[t] = rand(0.88, 0.96);
     for (let k = 0; k < MAX_NODES; k++) {
       const n = t * MAX_NODES + k;
       nx[n] = ox[n] = cx;
@@ -125,6 +126,7 @@ export function createTink(PIXI) {
       }
       const offscreen = cx < -OFFSCREEN || cx > w + OFFSCREEN || cy < -OFFSCREEN || cy > h + OFFSCREEN;
 
+      swayTime += dt / 60;
       let fx = 0;
       let fy = 0;
 
@@ -193,8 +195,10 @@ export function createTink(PIXI) {
           const a = Math.atan2(ny[n - 1] - ny[n], nx[n - 1] - nx[n]);
           nx[n] = nx[n - 1] - Math.cos(a) * link;
           ny[n] = ny[n - 1] - Math.sin(a) * link;
-          nvx[n] = (nx[n] - ox[n]) * fric[t] * (1 - FRICTION);
-          nvy[n] = (ny[n] - oy[n]) * fric[t] * (1 - FRICTION);
+          // Each node gets a slow, out-of-phase sway so the legs keep curling and drifting.
+          const sway = Math.sin(swayTime * 1.3 + t * 1.7 + k * 0.45) * SWAY * (k / len[t]);
+          nvx[n] = (nx[n] - ox[n]) * fric[t] * (1 - FRICTION) + Math.cos(t * 0.52) * sway;
+          nvy[n] = (ny[n] - oy[n]) * fric[t] * (1 - FRICTION) + Math.sin(t * 0.52) * sway;
           ox[n] = nx[n];
           oy[n] = ny[n];
         }
@@ -220,19 +224,8 @@ export function createTink(PIXI) {
       }
       for (let t = 0; t < TENTACLES; t++) drawTentacle(t);
 
-      // Head and eyes; the eyes look where it's heading (or at the mouse when close).
+      // Head.
       view.circle(cx, cy, headR).fill({ color: 0xffffff });
-      const look = Math.hypot(vx, vy) > 0.2 ? Math.atan2(vy, vx) : Math.atan2(mouseY - cy, mouseX - cx);
-      const eR = Math.max(0.5, HEAD_RADIUS * 0.22 * SCALE);
-      const eOff = HEAD_RADIUS * 0.34 * SCALE;
-      for (let side = -1; side <= 1; side += 2) {
-        const a = look + side * 0.45;
-        const ex = cx + Math.cos(a) * eOff;
-        const ey = cy + Math.sin(a) * eOff;
-        view.circle(ex, ey, eR * 3).fill({ color: EYE_COLOR, alpha: 0.3 });
-        view.circle(ex, ey, eR * 1.5).fill({ color: EYE_COLOR, alpha: 0.7 });
-        view.circle(ex, ey, eR).fill({ color: 0xffffff });
-      }
     },
   };
 }
