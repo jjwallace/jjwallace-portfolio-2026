@@ -6,7 +6,9 @@ const ATLAS_URL = new URL("../sprites/sea-life.json", import.meta.url).href;
 const SWIM_SPEED = 0.5; // 30fps atlas played on a 60fps ticker
 const WRAP_MARGIN = 120;
 const ZAP_RADIUS = 70;
-const REAR_FISH = 200;
+// Rear school: 140 small, 88 medium, 32 large (half the small fish of the default mix).
+const REAR_FISH = 260;
+const REAR_SHARES = [140 / 260, 88 / 260, 32 / 260];
 const REAR_FISH_DEPTH = 0.2;
 
 // Light rays from the surface above: near-vertical shafts that tilt slightly outward the further
@@ -134,7 +136,7 @@ async function start() {
   drawRays();
 
   // A large dark school of tentacled fish swims between the rear and front jellyfish.
-  const school = createSchool(PIXI, { count: REAR_FISH, color: 0x000000, alpha: 0.6, sizeScale: 0.8, speedScale: 0.8 });
+  const school = createSchool(PIXI, { count: REAR_FISH, color: 0x000000, alpha: 0.6, sizeScale: 1.05, speedScale: 0.8, shares: REAR_SHARES });
   app.stage.addChildAt(school.view, 1);
   let cursorX = -1e4;
   let cursorY = -1e4;

@@ -35,10 +35,10 @@ const rand = (min, max) => Math.random() * (max - min) + min;
 
 /**
  * @param {object} PIXI  the Pixi module
- * @param {object} opts  { count, color, alpha (multiplier), sizeScale, speedScale }
+ * @param {object} opts  { count, color, alpha (multiplier), sizeScale, speedScale, shares (small, medium, large) }
  * @returns {{ view: object, step(dt, w, h, scrollShift, cursorX, cursorY): void }}
  */
-export function createSchool(PIXI, { count, color = 0xffffff, alpha = 1, sizeScale = 1, speedScale = 1 }) {
+export function createSchool(PIXI, { count, color = 0xffffff, alpha = 1, sizeScale = 1, speedScale = 1, shares = TIERS.map((t) => t.share) }) {
   const px = new Float32Array(count);
   const py = new Float32Array(count);
   const vx = new Float32Array(count);
@@ -55,7 +55,7 @@ export function createSchool(PIXI, { count, color = 0xffffff, alpha = 1, sizeSca
 
   for (let i = 0; i < count; i++) {
     const r = i / count;
-    const t = r < TIERS[0].share ? 0 : r < TIERS[0].share + TIERS[1].share ? 1 : 2;
+    const t = r < shares[0] ? 0 : r < shares[0] + shares[1] ? 1 : 2;
     const a = rand(0, Math.PI * 2);
     tier[i] = t;
     head[i] = rand(...TIERS[t].head) * sizeScale;
