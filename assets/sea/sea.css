@@ -1,0 +1,333 @@
+html {
+  background: #06204f linear-gradient(180deg, #1a6fd6 0%, #0a3d91 45%, #06204f 100%) fixed;
+}
+
+body {
+  background: transparent;
+}
+
+#sea {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* The theme's content column is now just a transparent stack of cards. */
+.container-lg {
+  position: relative;
+  z-index: 1;
+  margin-top: 16px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* One frosted-glass card per portfolio item. */
+.container-lg .card {
+  background: rgba(19, 30, 46, 0.58);
+  -webkit-backdrop-filter: blur(14px) saturate(110%);
+  backdrop-filter: blur(14px) saturate(110%);
+  border-radius: 16px;
+  padding: 8px 28px 28px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+/* The intro card is near-black, so the name reads first. */
+.container-lg .card.intro {
+  background: rgba(2, 6, 14, 0.82);
+  padding-top: 16px;
+}
+.container-lg .card > :first-child {
+  margin-top: 0;
+}
+.container-lg .card > :last-child {
+  margin-bottom: 0;
+}
+
+/* Light text to match the glass. */
+.container-lg.markdown-body,
+.container-lg .markdown-body,
+.container-lg h1,
+.container-lg h2,
+.container-lg h3,
+.container-lg strong {
+  color: #fff;
+}
+.container-lg p,
+.container-lg li {
+  color: rgba(255, 255, 255, 0.88);
+}
+.container-lg a {
+  color: #9fd8ff;
+}
+.container-lg a:hover {
+  color: #fff;
+}
+.container-lg h1,
+.container-lg h2,
+.container-lg hr {
+  border-color: rgba(255, 255, 255, 0.22) !important;
+}
+.container-lg hr {
+  background-color: rgba(255, 255, 255, 0.22);
+}
+.container-lg code {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+.container-lg blockquote {
+  color: rgba(255, 255, 255, 0.75);
+  border-left-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Project screenshots: rounded corners and a soft shadow, no frame. */
+.container-lg img {
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* Browsers without backdrop-filter get a solid card so text stays readable. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .container-lg .card {
+    background: rgba(19, 30, 46, 0.92);
+  }
+  .container-lg .card.intro {
+    background: rgba(2, 6, 14, 0.95);
+  }
+}
+
+/* The theme repeats site.title as an h1 above the README's own h1; hide the duplicate. */
+.container-lg > h1:first-child {
+  display: none;
+}
+
+/* Theme tables have white/gray rows and grid lines; make them see-through and borderless on the glass. */
+.container-lg table,
+.container-lg table tr,
+.container-lg table th,
+.container-lg table td {
+  background-color: transparent !important;
+  border: none !important;
+}
+.container-lg sub {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Fish overlay: sits above the page, transparent, and lets every click through. */
+#boids {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Intro: the page starts black. The fish canvas takes over this cover with its own black veil
+   and fades it out; if the canvas is not ready within 1.5 s, the cover fades on its own. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  background: #000;
+  pointer-events: none;
+  animation: sea-intro-fallback 0.8s ease 1.5s forwards;
+}
+html.sea-ready body::before {
+  display: none;
+}
+@keyframes sea-intro-fallback {
+  to { opacity: 0; visibility: hidden; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { display: none; }
+}
+
+/* Full-width hero images (e.g. T.I.N.K.). */
+.container-lg img.full-bleed {
+  width: 100%;
+}
+
+/* Copyright line under the last card. */
+.container-lg .site-footer {
+  margin: 4px 0 24px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Intro card: white on the left, then a grey band, then near-black, divided by slashes leaning 22.5° from vertical.
+   A 112.5deg gradient runs along (sin 112.5°, -cos 112.5°) = (0.9239, 0.3827), so a stop of
+   --slash × 0.9239 puts the top of the slash at --slash px; it then drifts 0.414 px left per px down. */
+.container-lg .card.intro {
+  --slash: 285px;
+  --edge: calc(var(--slash) * 0.9239);
+  --stripe: 50px; /* grey band between the white wedge and the black */
+  --edge2: calc((var(--slash) + var(--stripe)) * 0.9239);
+  position: relative;
+  background:
+    linear-gradient(112.5deg, transparent 0 var(--edge), #8d939b calc(var(--edge) + 1px) var(--edge2), #04070d calc(var(--edge2) + 1px)),
+    #f4f6f8;
+}
+/* The theme gives h1 a 24px top margin; the card padding is enough. */
+.container-lg .card.intro > h1 {
+  margin-top: 0;
+}
+/* Copy sits on the dark side, right of the grey band. */
+.container-lg .card.intro > :not(.intro-logo) {
+  margin-left: calc(var(--slash) + var(--stripe) + 20px);
+}
+/* Squid logo: on the white side, spilling past the card's top, left and bottom edges. */
+.container-lg .intro-logo {
+  position: absolute;
+  top: -28px;
+  left: -36px;
+  width: 260px;
+  pointer-events: none;
+}
+.container-lg .intro-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent !important; /* the theme gives markdown images a white background */
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45));
+}
+@media (max-width: 720px) {
+  /* Phones: the wedge becomes a 140px band across the top and the copy runs full width below it. */
+  .container-lg .card.intro {
+    --slash: 240px;
+    padding-top: 156px;
+    background:
+      linear-gradient(#04070d, #04070d) 0 140px / 100% 100% no-repeat,
+      linear-gradient(112.5deg, transparent 0 var(--edge), #8d939b calc(var(--edge) + 1px) var(--edge2), #04070d calc(var(--edge2) + 1px)) 0 0 / 100% 140px no-repeat,
+      #f4f6f8;
+  }
+  .container-lg .card.intro > :not(.intro-logo) {
+    margin-left: 0;
+  }
+  .container-lg .card.intro {
+    --stripe: 30px;
+  }
+  .container-lg .intro-logo {
+    top: -20px;
+    left: -16px;
+    width: 140px;
+  }
+}
+
+/* ── Typography polish ─────────────────────────────────────────── */
+
+/* Display face for the name and project titles; body text keeps the system font. */
+.container-lg h1,
+.container-lg h2,
+.container-lg h3 {
+  font-family: "Sora", "Segoe UI", system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Cards separate the sections, so the theme's heading underlines are just noise. */
+.container-lg .card h2 {
+  border-bottom: none !important;
+  padding-bottom: 0;
+  margin: 2px 0 10px;
+}
+
+/* Small uppercase label above each project title. */
+.container-lg .card .eyebrow {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8fd8ee;
+}
+
+/* Keep running text near 68 characters a line; images still span the card. */
+.container-lg .card > p:not(:has(img)),
+.container-lg .card > ul {
+  max-width: 68ch;
+}
+
+/* Link rows as pill buttons. */
+.container-lg .links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  max-width: none !important;
+}
+.container-lg .links a {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.container-lg .links a:hover,
+.container-lg .links a:focus-visible {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  outline: none;
+}
+.container-lg .links span {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Older games and client work: a real grid of cards (3 across, 2 on tablets, 1 on phones). */
+.container-lg .game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 20px;
+  margin-top: 16px;
+}
+.container-lg .game {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.container-lg .game img {
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+}
+.container-lg .game h3 {
+  margin: 12px 0 2px;
+  font-size: 17px;
+}
+.container-lg .game .meta {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.62);
+}
+.container-lg .game p {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+.container-lg .game .links {
+  margin-top: auto;
+}
+@media (max-width: 900px) {
+  .container-lg .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .container-lg .game-grid { grid-template-columns: 1fr; }
+}
+
+/* Dark band behind each section's label and title, flush with the card's top edge. */
+.container-lg .card > .card-head:first-child {
+  margin: -8px -28px 16px;
+  padding: 16px 28px 14px;
+  background: rgba(3, 6, 12, 0.82);
+  border-radius: 16px 16px 0 0;
+}
+.container-lg .card-head > :last-child {
+  margin-bottom: 0;
+}

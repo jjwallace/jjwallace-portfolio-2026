@@ -1,2 +1,4 @@
-title: Jesse Wallace
+title: "Jesse Wallace: Portfolio 2026"
 description: "Portfolio 2026: interactive web games, canvas rendering, and AI-native tools"
+exclude:
+  - tools
