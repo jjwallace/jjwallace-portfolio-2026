@@ -11,6 +11,7 @@ const LENGTH = 12.286;
 const FRICTION = 0.04; // much lower than the original 0.181 so tentacles keep momentum and keep moving
 const SWAY = 0.12; // a slow sideways push on each tentacle node so the legs drift even when T.I.N.K. is still
 const TENTACLES = 8;
+const FAR_SHADE = 0x86; // grey level of the farthest tentacle (white is 0xff)
 const MAX_NODES = 16;
 
 const PARTICLES = 300; // ring buffer
@@ -43,6 +44,10 @@ export function createTink(PIXI) {
   // Tentacles: per-tentacle shape, then node buffers (current, previous, velocity).
   const len = new Uint8Array(TENTACLES);
   const radius = new Float32Array(TENTACLES);
+  // Depth: tentacles rooted on the far side of the head (top of the ring, seen slightly from above)
+  // are shaded darker and drawn first, so the near ones overlap them.
+  const shade = new Uint32Array(TENTACLES);
+  const order = [];
   const spacing = new Float32Array(TENTACLES);
   const fric = new Float32Array(TENTACLES);
   const nx = new Float32Array(TENTACLES * MAX_NODES);
@@ -62,6 +67,10 @@ export function createTink(PIXI) {
   for (let t = 0; t < TENTACLES; t++) {
     len[t] = Math.floor(rand(10, 16));
     radius[t] = rand(0.8, 0.9); // nearly uniform thickness
+    const depth = (1 - Math.sin((t / TENTACLES) * Math.PI * 2)) / 2; // 0 near, 1 far
+    const c = Math.round(255 - depth * (255 - FAR_SHADE));
+    shade[t] = (c << 16) | (c << 8) | Math.min(255, c + 12); // a touch of blue in the shadow
+    order.push([depth, t]);
     spacing[t] = rand(0.2, 1);
     fric[t] = rand(0.88, 0.96);
     for (let k = 0; k < MAX_NODES; k++) {
@@ -70,6 +79,8 @@ export function createTink(PIXI) {
       ny[n] = oy[n] = cy;
     }
   }
+
+  const drawOrder = order.sort((a, b) => b[0] - a[0]).map(([, t]) => t); // far to near
 
   // Sparkle trail: a ring buffer; the oldest particle is overwritten when full.
   const px = new Float32Array(PARTICLES);
@@ -111,7 +122,7 @@ export function createTink(PIXI) {
       view
         .moveTo(nx[base + k - 1], ny[base + k - 1])
         .lineTo(nx[base + k], ny[base + k])
-        .stroke({ width, color: 0xffffff, cap: "round" });
+        .stroke({ width, color: shade[t], cap: "round" });
     }
   };
 
@@ -222,7 +233,7 @@ export function createTink(PIXI) {
         py[i] += pvy[i] * dt;
         if (life[i] > 0.03) view.rect(px[i], py[i], 1, 1).fill({ color: 0xffffff, alpha: life[i] * 0.8 });
       }
-      for (let t = 0; t < TENTACLES; t++) drawTentacle(t);
+      for (const t of drawOrder) drawTentacle(t);
 
       // Head.
       view.circle(cx, cy, headR).fill({ color: 0xffffff });

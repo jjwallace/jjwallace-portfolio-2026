@@ -129,7 +129,7 @@ Commercial web games from 2008 to 2016, published by Nickelodeon, MTV, ArmorGame
 <a href="https://www.kongregate.com/en/games/jjwallace/gum-drop-hop"><img loading="lazy" decoding="async" src="screenshots/older/gumdrophop.webp" alt="Gum Drop Hop" width="100%"></a>
 <h3>Gum Drop Hop</h3>
 <p class="meta">MaxGames · Designer, Animator, Programmer · 21 days</p>
-<p>Non-violent platformer. 360 million plays in 3 years; 2B+ plays across the franchise.</p>
+<p>Non-violent platformer.</p>
 <p class="links"><a href="https://www.kongregate.com/en/games/jjwallace/gum-drop-hop" aria-label="Play Gum Drop Hop">Play</a></p>
 </div>
 <div class="game">

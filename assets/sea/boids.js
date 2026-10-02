@@ -4,6 +4,7 @@
 // to reveal the site.
 import { createSchool } from "./school.js";
 import { createTink } from "./tink.js";
+import { createDiver } from "./diver.js";
 
 const PIXI_URL = new URL("../vendor/pixi-sea.min.mjs", import.meta.url).href; // trimmed PixiJS 8.22, see tools/
 const ATLAS_URL = new URL("../sprites/sea-life.json", import.meta.url).href;
@@ -101,7 +102,8 @@ async function start() {
   horse.animationSpeed = SWIM_SPEED;
   horse.position.set(-40, window.innerHeight * 0.7);
   horse.play();
-  app.stage.addChild(horse, veil);
+  const diver = await createDiver(PIXI, app.renderer);
+  app.stage.addChild(horse, diver.view, veil);
   let trip = null;
   const newTrip = () => {
     const to = { x: rand(60, window.innerWidth - 60), y: rand(80, window.innerHeight - 80) };
@@ -138,6 +140,7 @@ async function start() {
 
     school.step(dt, w, h, scrollShift, cursorX, cursorY);
     tink.step(dt, w, h, scrollShift);
+    diver.step(dt, w, h, ticker.deltaMS);
 
     bubbleDebt += BUBBLE_RATE * dt;
     while (bubbleDebt >= 1) { emitBubble(h + 10); bubbleDebt--; }

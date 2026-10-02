@@ -161,6 +161,9 @@ html.sea-ready body::before {
    --slash × 0.9239 puts the top of the slash at --slash px; it then drifts 0.414 px left per px down. */
 .container-lg .card.intro {
   --slash: 285px;
+  /* Keep the white, grey and black stripes exactly as drawn in dark and high-contrast modes. */
+  color-scheme: only light;
+  forced-color-adjust: none;
   --edge: calc(var(--slash) * 0.9239);
   --stripe: 50px; /* grey band between the white wedge and the black */
   --edge2: calc((var(--slash) + var(--stripe)) * 0.9239);
@@ -333,4 +336,15 @@ html.sea-ready body::before {
 }
 .container-lg .card-head > :last-child {
   margin-bottom: 0;
+}
+
+
+/* Breathing room between the intro card and the first project. */
+.container-lg .card.intro {
+  margin-bottom: 180px; /* plus the 20px gap between cards = 200px */
+}
+@media (max-width: 720px) {
+  .container-lg .card.intro {
+    margin-bottom: 60px;
+  }
 }
